@@ -9,11 +9,11 @@ Classifying effectively each person credit score helps the GFC to create a profi
 
 With the training data, It was noticeable that the target (Credit_Score) was unbalanced showing more observations labeled as "Standard". From the beginning I knew that my biggest challenge through this project was to create a Machine Learning Model that can differentiate between the unbalanced labels (Poor and Good credit score).
 
-![Target balance](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/Target%20Balace.png)
+![Target balance](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/Target%20Balace.png)
 
 In order to create a model that can differentiate between the unbalanced labels I needed to understand the profile of each one (Poor and Good credit score), understanding those patterns and looking for them in the data will made a good performance model for the problem, the statistics of each profile showed me the following:
 
-![Target Statistics](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/Target%20Statistics.png)
+![Target Statistics](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/Target%20Statistics.png)
 
 It is noticeable that there were manny cut off points to determine if someone has good or poor credit score, the ones I notice are:
 
@@ -29,7 +29,7 @@ It is noticeable that there were manny cut off points to determine if someone ha
 
 By that point I knew that I have the data I needed to create a good model. There was a few challenges through the project like many arbitrary values and the data that needed to be filled, also there were many outliers in some feature that needed to be understand and decide if they were worth removing or leaving. Some outliers showed good patterns for our model, such as Total_EMI_per_month:
 
-![EMI_per_month](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/EMI%20per%20Month.png)
+![EMI_per_month](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/EMI%20per%20Month.png)
 
 Outliers than ended up being valuable for the models performance. Since it was a multi-class classification problem I needed to choose Machine Learning algorithms that support this type of classification, I decided to try with:
 
@@ -50,29 +50,29 @@ For classifications problems I could not based my solution only in the Score met
 
 Knowing what performance the model needed to achieve in order to be useful I created a cross validation scaling the data in each fold to reduce data leakage and I managed to score the next results:
 
-![Algorithms Performance](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/Algorithms%20Performance.png)
+![Algorithms Performance](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/Algorithms%20Performance.png)
 
 ## Final Decision
 
 Random Forest showed the best performance out of all of the algorithms So I decided to use Random Forest and tune its hyperparameters, after the tuned I trained another model in a cross validation to see its performance and got the following results:
 
-![Random Forest Performance](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/Random%20Forest%20Classification%20Report.png)
+![Random Forest Performance](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/Random%20Forest%20Classification%20Report.png)
 
 The model got a precision of 0.75 in classifying 1 (Good credit score) and 0.78 in classifying 2 (Poor credit score) and an F1-score (It describes the optimal blend of precision and recall combined) of 0.74 for 1 (Good credit score) and 0.79 for 2 (Poor credit score) with an overall accuracy (Including 0 Standard) of 0.80.
 
 The confuision matrix for this tunned model were showing the next results:
 
-![Confusion Matrix](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/Random%20Forest%20Confusion%20Matrix.png)
+![Confusion Matrix](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/Random%20Forest%20Confusion%20Matrix.png)
 
 It is noticeable that the model really learned to differentiate between 1 (Good credit score) and 2 (Poor credit score) which was the objetive. From the confusion matrix out of 17.000 there is only 25 observations predicted as 2 (Poor credit score) when they were really 1 (Good credit score) and 70 observatios predicted as 1 (Good credit score) when they were really 2 (Poor credit score). This means that from the cross validation the model performed very well classifying the data points.
 
 Since Random Forest showed an amazing performance I decided to train the final model with the entire dataset (85.000 Observations) in order to solve the problem and understand the importance of each feature trainned. The feature importance graph looked like:
 
-![Feature importance](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/Random%20Forest%20Feature%20Importance.png)
+![Feature importance](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/Random%20Forest%20Feature%20Importance.png)
 
 From the chart we can see that they were a lot of features that were not that much important for the model and among those that were important in the trainning we have "Outstanding_Debt", "Interest_Rate" and "Credit_History_Age". Since the GFC provided a testing data, I predicted the values of the data and compare their statistics to the original (Model trained) data set to see if the Random Forest model could really describe our data.
 
-![Statistics](https://raw.githubusercontent.com/liamarguedas/data/main/Data-Science/Credit-Score-Classification/Summary-Charts/Train%20vs%20Test%20Statistics.png)
+![Statistics](https://raw.githubusercontent.com/liamarguedas/credit-score-GFC/main/Summary-Charts/Train%20vs%20Test%20Statistics.png)
 
 We can see that the model predictions hold the statistics from the original data set, which is good for our problem. An example of this is age, at the beginning I said that older people usually have good credit score than younger people and the predicted variables showed the same behavior and the patterns hold for each continuos feature in the project. 
 
